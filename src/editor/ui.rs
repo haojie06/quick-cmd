@@ -9,14 +9,21 @@ use ratatui::{
 use super::app::{App, CurrentScreen, CurrentlyEditing};
 
 pub fn ui(f: &mut Frame, app: &mut App) {
+    let outter_block = Block::default().borders(Borders::ALL).title("JSON Editor");
+    f.render_widget(outter_block, f.size());
+    let base_inner_layout = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints([Constraint::Percentage(100)])
+        .split(f.size())[0];
     let chunks = Layout::default()
         .direction(Direction::Vertical)
+        .margin(1)
         .constraints([
             Constraint::Length(3),
             Constraint::Min(1),
             Constraint::Length(3),
         ])
-        .split(f.size());
+        .split(base_inner_layout);
     // title
     let title_block = Block::default()
         .borders(Borders::ALL)
@@ -26,7 +33,7 @@ pub fn ui(f: &mut Frame, app: &mut App) {
         Style::default().fg(Color::Green),
     ))
     .block(title_block);
-    f.render_widget(title, chunks[1]);
+    f.render_widget(title, chunks[0]);
 
     // pairs list
     let mut list_items = Vec::<ListItem>::new();
