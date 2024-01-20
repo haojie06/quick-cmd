@@ -5,7 +5,7 @@ use ratatui::{
     Frame,
 };
 
-use crate::app::App;
+use super::app::App;
 
 pub fn render(app: &mut App, f: &mut Frame) {
     f.render_widget(

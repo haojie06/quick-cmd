@@ -1,4 +1,4 @@
-use crate::app::App;
+use super::app::App;
 use crossterm::event::{KeyCode, KeyEvent, KeyModifiers};
 
 pub fn update(app: &mut App, key_event: KeyEvent) {
