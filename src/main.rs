@@ -1,3 +1,5 @@
+use std::process::{self, Stdio};
+
 use anyhow::Result;
 use app::App;
 use tui::Tui;
@@ -28,5 +30,13 @@ fn main() -> Result<()> {
         };
     }
     Tui::exit()?;
+    if let Some(command) = app.command_to_execute {
+        println!("{}", command);
+        let command_output = process::Command::new("bash")
+            .arg("-c")
+            .arg(command)
+            .output()?;
+        println!("{}", String::from_utf8_lossy(&command_output.stdout));
+    }
     Ok(())
 }

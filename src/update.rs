@@ -11,6 +11,7 @@ pub enum Action {
     NextCommand,
     PrevCommand,
     ChangeScreen(CurrentScreen),
+    ExecuteCommand,
     Exit,
     // ...
 }
@@ -32,6 +33,7 @@ pub fn get_action(_app: &App, event: Event) -> Option<Action> {
             KeyCode::Char('q') => Some(Action::Exit),
             KeyCode::Char('j') => Some(Action::NextCommand),
             KeyCode::Char('k') => Some(Action::PrevCommand),
+            KeyCode::Enter => Some(Action::ExecuteCommand),
             _ => None,
         },
         // _ => None,
@@ -47,6 +49,10 @@ pub fn update_app(app: &mut App, action: Action) {
         }
         Action::Exit => {
             app.quit();
+        }
+        Action::ExecuteCommand => {
+            let command_index = app.command_list.state.selected().unwrap();
+            app.execute_command(command_index);
         }
         _ => {}
     }

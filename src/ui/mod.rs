@@ -1,7 +1,7 @@
 use ratatui::{
     layout::{Constraint, Direction, Layout},
     style::{Color, Style, Stylize},
-    widgets::{Block, Borders, List, ListItem, Paragraph},
+    widgets::{Block, Borders, List, ListItem},
     Frame,
 };
 
@@ -20,7 +20,7 @@ pub fn ui(f: &mut Frame, app: &mut App) {
         .iter()
         .map(|command| {
             // let text = Paragraph::new(command.command.clone());
-            ListItem::new(command.command.clone())
+            ListItem::new(command.command_text.clone())
                 .style(Style::default().fg(Color::White))
                 .bg(Color::Black)
         })

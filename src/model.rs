@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CommandCollection {
     pub name: String,
-    pub commands: Vec<Command>,
+    pub commands: Vec<CommandItem>,
 }
 
 impl CommandCollection {
@@ -14,7 +14,7 @@ impl CommandCollection {
         }
     }
 
-    pub fn add_command(&mut self, command: Command) {
+    pub fn add_command(&mut self, command: CommandItem) {
         self.commands.push(command);
     }
 
@@ -22,17 +22,17 @@ impl CommandCollection {
         self.commands.remove(index);
     }
 
-    pub fn update_command(&mut self, index: usize, command: Command) {
+    pub fn update_command(&mut self, index: usize, command: CommandItem) {
         self.commands[index] = command;
     }
 
-    pub fn get_commands(&self) -> &Vec<Command> {
+    pub fn get_commands(&self) -> &Vec<CommandItem> {
         &self.commands
     }
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Command {
-    pub command: String,
+pub struct CommandItem {
+    pub command_text: String,
     pub description: String,
 }
